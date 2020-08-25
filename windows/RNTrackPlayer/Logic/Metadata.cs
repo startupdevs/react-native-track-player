@@ -60,14 +60,14 @@ namespace TrackPlayer.Logic
         {
             Debug.WriteLine("Updating options...");
 
-            if (data.TryGetValue("jumpForwardInterval", out var ji))
+            if (data.TryGetValue("jumpForwardInterval", out var jfi))
             {
-                jumpForwardInterval = (double)ji;
+                jumpForwardInterval = (double)jfi;
             }
 
-            if (data.TryGetValue("jumpBackwardInterval", out var ji))
+            if (data.TryGetValue("jumpBackwardInterval", out var jbi))
             {
-                jumpBackwardInterval = (double)ji;
+                jumpBackwardInterval = (double)jbi;
             }
 
             if (data.TryGetValue("capabilities", out var caps))
