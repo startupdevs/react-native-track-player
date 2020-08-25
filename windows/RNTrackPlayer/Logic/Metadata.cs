@@ -9,7 +9,8 @@ namespace TrackPlayer.Logic
     {
         private MediaManager manager;
         private SystemMediaTransportControls controls;
-        private double jumpInterval = 15;
+        private double jumpForwardInterval = 15;
+        private double jumpBackwardInterval = 15;
         private bool play, pause, stop, previous, next, jumpForward, jumpBackward, seek;
 
         public Metadata(MediaManager manager)
@@ -59,9 +60,14 @@ namespace TrackPlayer.Logic
         {
             Debug.WriteLine("Updating options...");
 
-            if (data.TryGetValue("jumpInterval", out var ji))
+            if (data.TryGetValue("jumpForwardInterval", out var ji))
             {
-                jumpInterval = (double)ji;
+                jumpForwardInterval = (double)ji;
+            }
+
+            if (data.TryGetValue("jumpBackwardInterval", out var ji))
+            {
+                jumpBackwardInterval = (double)ji;
             }
 
             if (data.TryGetValue("capabilities", out var caps))
@@ -137,12 +143,12 @@ namespace TrackPlayer.Logic
                 case SystemMediaTransportControlsButton.FastForward:
                     eventType = Events.ButtonJumpForward;
                     data = new JObject();
-                    data["interval"] = jumpInterval;
+                    data["interval"] = jumpForwardInterval;
                     break;
                 case SystemMediaTransportControlsButton.Rewind:
                     eventType = Events.ButtonJumpBackward;
                     data = new JObject();
-                    data["interval"] = jumpInterval;
+                    data["interval"] = jumpBackwardInterval;
                     break;
                 default:
                     return;
