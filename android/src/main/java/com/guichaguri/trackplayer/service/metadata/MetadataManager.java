@@ -43,7 +43,8 @@ public class MetadataManager {
     private final MediaSessionCompat session;
 
     private int ratingType = RatingCompat.RATING_NONE;
-    private int jumpInterval = 15;
+    private int jumpForwardInterval = 15;
+    private int jumpBackwardInterval = 15;
     private long actions = 0;
     private long compactActions = 0;
     private SimpleTarget<Bitmap> artworkTarget;
@@ -144,7 +145,8 @@ public class MetadataManager {
         builder.setSmallIcon(getIcon(options, "icon", R.drawable.play));
 
         // Update the jump interval
-        jumpInterval = Utils.getInt(options, "jumpInterval", 15);
+        jumpForwardInterval = Utils.getInt(options, "jumpForwardInterval", 15);
+        jumpBackwardInterval = Utils.getInt(options, "jumpBackwardInterval", 15);
 
         // Update the rating type
         ratingType = Utils.getInt(options, "ratingType", RatingCompat.RATING_NONE);
@@ -157,8 +159,12 @@ public class MetadataManager {
         return ratingType;
     }
 
-    public int getJumpInterval() {
-        return jumpInterval;
+    public int getJumpForwardInterval() {
+        return jumpForwardInterval;
+    }
+
+    public int getJumpBackwardInterval() {
+        return jumpBackwardInterval;
     }
 
     public void removeNotifications() {

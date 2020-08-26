@@ -91,7 +91,8 @@ declare namespace RNTrackPlayer {
 
   export interface MetadataOptions {
     ratingType?: RatingType;
-    jumpInterval?: number;
+    jumpForwardInterval?: number;
+    jumpBackwardInterval?: number;
     likeOptions?: FeedbackOptions;
     dislikeOptions?: FeedbackOptions;
     bookmarkOptions?: FeedbackOptions;
