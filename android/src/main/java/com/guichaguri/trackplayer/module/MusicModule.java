@@ -91,6 +91,9 @@ public class MusicModule extends ReactContextBaseJavaModule implements ServiceCo
         }
     }
 
+    /**
+     * Helper function - use in getters to check if service is running - don't start service from getters
+     */
     private boolean isBinderReady() {
         return binder != null && binder.isReadyForPost();
     }
@@ -119,6 +122,9 @@ public class MusicModule extends ReactContextBaseJavaModule implements ServiceCo
         connecting = true;
     }
 
+    /**
+     * Helper function - execute actions & setters only when service is running, otherwise reject 
+     */
     private void runOnConnectionOrReject(final Promise callback, Runnable r) {
         if(isBinderReady()) {
             binder.post(r);
