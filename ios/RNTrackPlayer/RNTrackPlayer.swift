@@ -55,6 +55,7 @@ public class RNTrackPlayer: RCTEventEmitter {
             "PITCH_ALGORITHM_VOICE": PitchAlgorithm.voice.rawValue,
 
             "CAPABILITY_PLAY": Capability.play.rawValue,
+            "CAPABILITY_TOGGLE_PLAY_PAUSE": Capability.togglePlayPause.rawValue,
             "CAPABILITY_PLAY_FROM_ID": "NOOP",
             "CAPABILITY_PLAY_FROM_SEARCH": "NOOP",
             "CAPABILITY_PAUSE": Capability.pause.rawValue,
@@ -274,13 +275,11 @@ public class RNTrackPlayer: RCTEventEmitter {
     
     @objc(updateOptions:resolver:rejecter:)
     public func update(options: [String: Any], resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-
-        var capabilitiesStr = options["capabilities"] as? [String] ?? []
+        let capabilitiesStr = options["capabilities"] as? [String] ?? []
         if (capabilitiesStr.contains("play") && capabilitiesStr.contains("pause")) {
-            capabilitiesStr.append("togglePlayPause");
+            capabilitiesStr.append("togglePlayPause")
         }
-        let capabilities = capabilitiesStr.compactMap { Capability(rawValue: $0) }
-        
+        let capabilities = capabilitiesStr?.compactMap { Capability(rawValue: $0) } ?? []
         let remoteCommands = capabilities.map { capability in
             capability.mapToPlayerCommand(jumpForwardInterval: options["jumpForwardInterval"] as? NSNumber,
                                           jumpBackwardInterval: options["jumpBackwardInterval"] as? NSNumber,
