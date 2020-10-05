@@ -9,8 +9,7 @@
 import Foundation
 
 enum Capability: String {
-    case play, pause, stop, next, previous, jumpForward, jumpBackward, seek, like, dislike, bookmark
-    
+    case play, pause, togglePlayPause, stop, next, previous, jumpForward, jumpBackward, seek, like, dislike, bookmark    
     func mapToPlayerCommand(jumpForwardInterval: NSNumber?,
                             jumpBackwardInterval: NSNumber?,
                             likeOptions: [String: Any]?,
@@ -23,6 +22,8 @@ enum Capability: String {
             return .play
         case .pause:
             return .pause
+        case .togglePlayPause:
+            return .togglePlayPause
         case .next:
             return .next
         case .previous:
