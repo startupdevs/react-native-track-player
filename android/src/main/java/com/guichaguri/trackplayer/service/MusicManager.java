@@ -25,6 +25,7 @@ import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.Player;
 import com.guichaguri.trackplayer.module.MusicEvents;
 import com.guichaguri.trackplayer.service.metadata.MetadataManager;
 import com.guichaguri.trackplayer.service.models.Track;
@@ -214,6 +215,20 @@ public class MusicManager implements OnAudioFocusChangeListener {
         bundle.putDouble("position", Utils.toSeconds(prevPos));
         bundle.putString("nextTrack", next != null ? next.id : null);
         service.emit(MusicEvents.PLAYBACK_TRACK_CHANGED, bundle);
+    }
+
+    public void onMediaItemTransition(@MediaItemTransitionReason int reason) {
+        Log.d(Utils.LOG, "onMediaItemTransition");
+
+        Bundle bundle = new Bundle();
+        bundle.putString("track", "DEFAULT_TRACK_PLACEHOLDER");
+        switch(reason) {
+            case (Player.MEDIA_ITEM_TRANSITION_REASON_AUTO):
+                service.emit(MusicEvents.PLAYBACK_AUTO_TRANSITION_NEXT_TRACK, bundle);
+                break;
+            default:
+                break;
+        }
     }
 
     public void onReset() {

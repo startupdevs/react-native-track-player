@@ -35,6 +35,7 @@ public class MusicEvents extends BroadcastReceiver {
     public static final String PLAYBACK_QUEUE_ENDED = "playback-queue-ended";
     public static final String PLAYBACK_METADATA = "playback-metadata-received";
     public static final String PLAYBACK_ERROR = "playback-error";
+    public static final String PLAYBACK_AUTO_TRANSITION_NEXT_TRACK = "playback-auto-transition-next-track";
 
     private final ReactContext reactContext;
 

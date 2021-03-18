@@ -6,6 +6,7 @@ import android.util.Log;
 import com.facebook.react.bridge.Promise;
 import com.google.android.exoplayer2.*;
 import com.google.android.exoplayer2.Player.EventListener;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.Timeline.Window;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.metadata.MetadataOutput;
@@ -420,5 +421,11 @@ public abstract class ExoPlayback<T extends Player> implements EventListener, Me
     public void onMetadata(Metadata metadata) {
         handleId3Metadata(metadata);
         handleIcyMetadata(metadata);
+    }
+
+    @Override
+    public void onMediaItemTransition(
+        @Nullable MediaItem mediaItem, @MediaItemTransitionReason int reason) {
+        manager.onMediaItemTransition(reason); 
     }
 }
