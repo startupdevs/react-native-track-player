@@ -86,7 +86,7 @@ public class MusicService extends HeadlessJsTaskService {
                             e.printStackTrace();
                         }
                     }
-                }
+                }.start();
                 // Stops the service right after
             }
         }
