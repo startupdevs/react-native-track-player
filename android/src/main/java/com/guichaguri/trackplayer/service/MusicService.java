@@ -75,9 +75,19 @@ public class MusicService extends HeadlessJsTaskService {
                 String channel = Utils.getNotificationChannel((Context) this);
 
                 // Sets the service to foreground with an empty notification
-//                 startForeground(1, new NotificationCompat.Builder(this, channel).build());
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            this.sleep(10000);
+                            startForeground(1, new NotificationCompat.Builder(this, channel).build());
+                            stopSelf();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 // Stops the service right after
-                stopSelf();
             }
         }
     }
